@@ -1,0 +1,183 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Service
+  description: Service Template
+
+servers:
+  - url: /api/v1
+
+security:
+  - BasicAuth: []
+
+tags:
+  - name: Settings
+    description: Operations on settings objects
+  - name: Logs
+    description: Operations on log entries
+
+paths:
+  /settings:
+    get:
+      description: Returns the current settings
+      tags:
+        - Settings
+      operationId: getSettings
+      responses:
+        "200":
+          description: Successfully returned the current settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+        "400":
+          $ref: "#/components/responses/400Error"
+
+    put:
+      description: Set new settings
+      tags:
+        - Settings
+      operationId: setSettings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Settings"
+      responses:
+        "200":
+          description: Successfully set new settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+        "400":
+          $ref: "#/components/responses/400Error"
+  /logs:
+    get:
+      description: Returns a list of all log entries
+      tags:
+        - Logs
+      operationId: getLogEntries
+      parameters:
+        - $ref: "#/components/parameters/PageLimit"
+        - $ref: "#/components/parameters/PageOffset"
+      responses:
+        "200":
+          description: Successfully returned a list of all log entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LogEntry"
+        "400":
+          $ref: "#/components/responses/400Error"
+
+    post:
+      description: Add a new log entry
+      tags:
+        - Logs
+      operationId: addLogEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogEntry"
+      responses:
+        "200":
+          description: Successfully created a new log entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogEntry"
+        "400":
+          $ref: "#/components/responses/400Error"
+  /logs/{entryId}:
+    get:
+      description: Obtain information about a log entry
+      tags:
+        - Logs
+      operationId: getLogEntry
+      parameters:
+        - name: entryId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Successfully returned a log entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogEntry"
+        "400":
+          $ref: "#/components/responses/400Error"
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+
+  schemas:
+    Settings:
+      type: object
+      required:
+        - applicationName
+      properties:
+        applicationName:
+          type: string
+          example: Application
+
+    LogEntry:
+      type: object
+      required:
+        - category
+        - level
+      properties:
+        id:
+          type: string
+          format: uuid
+        category:
+          type: string
+          enum:
+            - GET_SETTINGS
+            - SET_SETTINGS
+          example: SET_STTINGS
+        level:
+          type: string
+          enum:
+            - ERROR
+            - INFO
+            - WARNING
+        message:
+          type: string
+
+  parameters:
+    PageLimit:
+      name: limit
+      in: query
+      description: Limits the number of items on a page
+      schema:
+        type: integer
+
+    PageOffset:
+      name: offset
+      in: query
+      description: Specifies the page number of the artists to be displayed
+      schema:
+        type: integer
+
+  responses:
+    400Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
