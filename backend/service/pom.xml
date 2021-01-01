@@ -19,6 +19,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
   <properties>
     <java.version>11</java.version>
     <springfox-version>3.0.0</springfox-version>
+    <swagger-annotations-version>
+    1.6.2</swagger-annotations-version>
     <jaxb-api-version>2.2.11</jaxb-api-version>
     <jackson-databind-nullable-version>
     0.1.0</jackson-databind-nullable-version>
@@ -49,7 +51,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
-      <version>1.6.2</version>
+      <version>${swagger-annotations-version}</version>
     </dependency>
     <dependency>
       <groupId>io.springfox</groupId>
@@ -99,7 +101,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
             </goals>
             <configuration>
               <inputSpec>
-              ${basedir}/src/main/resources/api.yaml</inputSpec>
+              ${basedir}/src/main/resources/openapi.yaml</inputSpec>
               <generatorName>spring</generatorName>
               <apiPackage>
               ${project.groupId}.${project.artifactId}.api</apiPackage>
