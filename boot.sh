@@ -40,7 +40,7 @@ fi
 if [[ "$1" == "--prod" ]]; then
   BUILD_TAG=prod
   shift
-  echo "Using command line --repull"
+  echo "Using command line --prod"
 fi
 
 DOCKER_COMPOSE_FILE="docker-compose.yml"
@@ -53,11 +53,11 @@ fi
 
 ENV_FILE=".env${ENV_FILE_TAG}"
 echo "Using env file: ${ENV_FILE}"
-echo "Sourcinng env file: ${ENV_FILE}"
+echo "Sourcing env file: ${ENV_FILE}"
 source "${ENV_FILE}"
 
 echo
-echo " ..--------------------."
+echo " ..--------------------.."
 echo " .-[ Service Template ].-"
 echo " ..--------------------.."
 echo
@@ -146,4 +146,5 @@ echo "Frontend User:         ${KC_USER_NAME}"
 echo "Frontend Password:     ${KC_USER_PASSWORD}"
 echo
 echo "Backend URL:           ${BACKEND_URL}"
+echo "Swagger UI URL:        ${SWAGGER_UI_URL}"
 echo
