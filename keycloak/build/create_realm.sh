@@ -11,7 +11,7 @@ echo "User:          $KC_USER_NAME"
 echo "Frontend Name: $KC_FRONTEND_NAME"
 echo "Backend Name:  $KC_BACKEND_NAME"
 echo
-echo "Adding realm,clients, role and user"
+echo "Adding realm, clients, role and user"
 
 redirectUrisParam="redirectUris=[\"$KC_CLIENT_BASE_URL*\"]"
 rootUrlParam="rootUrl=\"$KC_CLIENT_ROOT_URL\""
