@@ -52,6 +52,12 @@ if [[ ! "${BUILD_TAG}" == "" ]]; then
 fi
 
 ENV_FILE=".env${ENV_FILE_TAG}"
+if [ ! -f "$ENV_FILE" ]; then
+  ENV_TEMPLATE=assets/env/env.template
+  echo "Env file \"$ENV_FILE\" does not exist"
+  echo "Copying \"$ENV_TEMPLATE\" to \"$ENV_FILE\""
+  cp "$ENV_TEMPLATE" "$ENV_FILE"
+fi
 echo "Using env file: ${ENV_FILE}"
 echo "Sourcing env file: ${ENV_FILE}"
 source "${ENV_FILE}"
