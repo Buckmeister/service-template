@@ -8,6 +8,11 @@ services:
       gateway:
       mongo:
         priority: 100
+    environment:
+      - APP_NAME=${APP_NAME:-Application}
+      - KEYCLOAK_BACKEND_URL=${KEYCLOAK_BACKEND_URL:-http://gateway/auth}
+      - KC_REALM=${KC_REALM:-app}
+      - MONGO_DB=${MONGO_DB:-Application}
     depends_on:
       - keycloak
       - mongo

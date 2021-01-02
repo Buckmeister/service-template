@@ -3,7 +3,6 @@ package de.bckx.backendservice.usecase;
 import de.bckx.backendservice.model.Settings;
 import de.bckx.backendservice.repository.SettingsRepository;
 import java.util.Optional;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GetSettings {
 
-  @Value("${settings.initial.application.name}")
+  @Value("${spring.application.name}")
   private String DEFAULT_APPLICATION_NAME;
 
   private final SettingsRepository settingsRepository;
