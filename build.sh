@@ -43,7 +43,7 @@ if [ "$1" == "--prod" ]; then
   echo "[INFO]-> Using command line --prod"
 fi
 
-SERVICE_NAME="$1"
+SERVICE_NAME="$*"
 
 DOCKER_COMPOSE_FILE="docker-compose.yml"
 echo "[INFO]-> Using docker-compose file: $DOCKER_COMPOSE_FILE"
@@ -104,13 +104,13 @@ if [ "$SERVICE_NAME" != "" ]; then
   echo "[INFO]-> Rebuilding Service \"$SERVICE_NAME\""
   echo
   echo "[RUN]-> docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS stop $SERVICE_NAME"
-  docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS stop "$SERVICE_NAME"
+  docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS stop $SERVICE_NAME
   echo
   echo "[RUN]-> docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS build $BUILD_CMD_ARGS $SERVICE_NAME"
-  docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS build $BUILD_CMD_ARGS "$SERVICE_NAME"
+  docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS build $BUILD_CMD_ARGS $SERVICE_NAME
   echo
   echo "[RUN]-> docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS up $UP_CMD_ARGS $SERVICE_NAME"
-  docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS up $UP_CMD_ARGS "$SERVICE_NAME"
+  docker-compose $ENV_CMD_ARGS $DC_CMD_ARGS up $UP_CMD_ARGS $SERVICE_NAME
   exit 0
 fi
 

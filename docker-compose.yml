@@ -49,6 +49,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD:-postgres}
       - DB_ADDR=${DB_ADDR:-postgres}
       - DB_DATABASE=${DB_DATABASE:-keycloak}
+      - PROXY_ADDRESS_FORWARDING=true
     depends_on:
       - postgres
   mongo:
