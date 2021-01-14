@@ -7,13 +7,23 @@ import java.util.UUID;
  */
 public class LogEntry {
 
-  UUID id;
+  UUID id = UUID.randomUUID();
 
   LogEntryCategory category;
   LogEntryLevel level;
   String message;
 
   public LogEntry() {}
+
+  public LogEntry(
+    LogEntryCategory category,
+    LogEntryLevel level,
+    String message
+  ) {
+    this.category = category;
+    this.level = level;
+    this.message = message;
+  }
 
   public UUID getId() {
     return this.id;
