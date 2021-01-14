@@ -30,7 +30,6 @@ public class LogsApiController implements LogsApi {
   private final GetLogEntry getLogEntry;
   private final ModelMapper modelMapper;
 
-  @org.springframework.beans.factory.annotation.Autowired
   public LogsApiController(
     NativeWebRequest request,
     AddLogEntry addLogEntry,
