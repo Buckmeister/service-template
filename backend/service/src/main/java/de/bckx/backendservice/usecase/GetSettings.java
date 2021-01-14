@@ -1,5 +1,8 @@
 package de.bckx.backendservice.usecase;
 
+import de.bckx.backendservice.model.LogEntry;
+import de.bckx.backendservice.model.LogEntryCategory;
+import de.bckx.backendservice.model.LogEntryLevel;
 import de.bckx.backendservice.model.Settings;
 import de.bckx.backendservice.repository.SettingsRepository;
 import java.util.Optional;
@@ -16,9 +19,14 @@ public class GetSettings {
   private String DEFAULT_APPLICATION_NAME;
 
   private final SettingsRepository settingsRepository;
+  private final AddLogEntry addLogEntry;
 
-  public GetSettings(SettingsRepository settingsRepository) {
+  public GetSettings(
+    SettingsRepository settingsRepository,
+    AddLogEntry addLogEntry
+  ) {
     this.settingsRepository = settingsRepository;
+    this.addLogEntry = addLogEntry;
   }
 
   public Settings get() {
@@ -33,6 +41,15 @@ public class GetSettings {
       settings.setApplicationName(DEFAULT_APPLICATION_NAME);
       settings = settingsRepository.save(settings);
     }
+
+    addLogEntry.add(
+      new LogEntry(
+        LogEntryCategory.GET_SETTINGS,
+        LogEntryLevel.INFO,
+        "Settings retrieved successfully"
+      )
+    );
+
     return settings;
   }
 }
