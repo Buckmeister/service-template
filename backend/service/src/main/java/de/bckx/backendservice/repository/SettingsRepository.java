@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
  * SettingsRepository
  */
 @Repository
-public interface SettingsRepository extends MongoRepository<Settings, UUID> {}
+public interface SettingsRepository extends MongoRepository<Settings, UUID> {
+  Optional<Settings> findFirstByOrderByIdAsc();
+}
