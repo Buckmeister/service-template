@@ -1,8 +1,8 @@
 package de.bckx.backendservice.usecase;
 
-import de.bckx.backendservice.model.LogEntry;
-import de.bckx.backendservice.model.LogEntryCategory;
-import de.bckx.backendservice.model.LogEntryLevel;
+import de.bckx.backendservice.model.AuditLogEntry;
+import de.bckx.backendservice.model.AuditLogEntryCategory;
+import de.bckx.backendservice.model.AuditLogEntryLevel;
 import de.bckx.backendservice.model.Settings;
 import de.bckx.backendservice.repository.SettingsRepository;
 import java.util.Optional;
@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 public class SetSettings {
 
   private final SettingsRepository settingsRepository;
-  private final AddLogEntry addLogEntry;
+  private final AddAuditLogEntry addLogEntry;
 
   public SetSettings(
     SettingsRepository settingsRepository,
-    AddLogEntry addLogEntry
+    AddAuditLogEntry addLogEntry
   ) {
     this.settingsRepository = settingsRepository;
     this.addLogEntry = addLogEntry;
@@ -33,9 +33,9 @@ public class SetSettings {
     }
 
     addLogEntry.add(
-      new LogEntry(
-        LogEntryCategory.SET_SETTINGS,
-        LogEntryLevel.INFO,
+      new AuditLogEntry(
+        AuditLogEntryCategory.SET_SETTINGS,
+        AuditLogEntryLevel.INFO,
         "Application Name: " + newSettings.getApplicationName()
       )
     );

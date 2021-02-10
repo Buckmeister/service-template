@@ -5,19 +5,19 @@ import java.util.UUID;
 /**
  * LogEntry
  */
-public class LogEntry {
+public class AuditLogEntry {
 
   UUID id = UUID.randomUUID();
 
-  LogEntryCategory category;
-  LogEntryLevel level;
+  AuditLogEntryCategory category;
+  AuditLogEntryLevel level;
   String message;
 
-  public LogEntry() {}
+  public AuditLogEntry() {}
 
-  public LogEntry(
-    LogEntryCategory category,
-    LogEntryLevel level,
+  public AuditLogEntry(
+    AuditLogEntryCategory category,
+    AuditLogEntryLevel level,
     String message
   ) {
     this.category = category;
@@ -33,19 +33,19 @@ public class LogEntry {
     this.id = id;
   }
 
-  public LogEntryCategory getCategory() {
+  public AuditLogEntryCategory getCategory() {
     return this.category;
   }
 
-  public void setCategory(LogEntryCategory category) {
+  public void setCategory(AuditLogEntryCategory category) {
     this.category = category;
   }
 
-  public LogEntryLevel getLevel() {
+  public AuditLogEntryLevel getLevel() {
     return this.level;
   }
 
-  public void setLevel(LogEntryLevel level) {
+  public void setLevel(AuditLogEntryLevel level) {
     this.level = level;
   }
 

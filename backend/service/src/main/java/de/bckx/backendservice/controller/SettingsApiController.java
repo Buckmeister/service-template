@@ -17,7 +17,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 @Api(tags = { "Settings" })
 @RestController
-@RequestMapping("${openapi.userManagement.base-path:/api/v1}")
+@RequestMapping("${openapi.serviceTemplate.base-path:/api/v1}")
 public class SettingsApiController implements SettingsApi {
 
   private final GetSettings getSettings;

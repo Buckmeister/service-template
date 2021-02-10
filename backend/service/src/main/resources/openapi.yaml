@@ -13,8 +13,8 @@ security:
 tags:
   - name: Settings
     description: Operations on settings objects
-  - name: Logs
-    description: Operations on log entries
+  - name: Audit Logs
+    description: Operations on audit log entries
 
 paths:
   /settings:
@@ -53,53 +53,33 @@ paths:
                 $ref: "#/components/schemas/Settings"
         "400":
           $ref: "#/components/responses/400Error"
-  /logs:
+  /auditlogs:
     get:
-      description: Returns a list of all log entries
+      description: Returns a list of all audit log entries
       tags:
-        - Logs
-      operationId: getLogEntries
+        - Audit Logs
+      operationId: getAuditLogEntries
       parameters:
         - $ref: "#/components/parameters/PageLimit"
         - $ref: "#/components/parameters/PageOffset"
       responses:
         "200":
-          description: Successfully returned a list of all log entries
+          description: Successfully returned a list of all audit log entries
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/LogEntry"
+                  $ref: "#/components/schemas/AuditLogEntry"
         "400":
           $ref: "#/components/responses/400Error"
 
-    post:
-      description: Add a new log entry
-      tags:
-        - Logs
-      operationId: addLogEntry
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LogEntry"
-      responses:
-        "200":
-          description: Successfully created a new log entry
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LogEntry"
-        "400":
-          $ref: "#/components/responses/400Error"
-  /logs/{entryId}:
+  /auditlogs/{entryId}:
     get:
-      description: Obtain information about a log entry
+      description: Obtain information about a audit log entry
       tags:
-        - Logs
-      operationId: getLogEntry
+        - Audit Logs
+      operationId: getAuditLogEntry
       parameters:
         - name: entryId
           in: path
@@ -109,11 +89,11 @@ paths:
             format: uuid
       responses:
         "200":
-          description: Successfully returned a log entry
+          description: Successfully returned a audit log entry
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LogEntry"
+                $ref: "#/components/schemas/AuditLogEntry"
         "400":
           $ref: "#/components/responses/400Error"
 components:
@@ -132,7 +112,7 @@ components:
           type: string
           example: Application
 
-    LogEntry:
+    AuditLogEntry:
       type: object
       required:
         - category

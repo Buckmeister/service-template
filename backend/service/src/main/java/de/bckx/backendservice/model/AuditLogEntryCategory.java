@@ -1,6 +1,6 @@
 package de.bckx.backendservice.model;
 
-public enum LogEntryCategory {
+public enum AuditLogEntryCategory {
   GET_SETTINGS,
   SET_SETTINGS,
 }
